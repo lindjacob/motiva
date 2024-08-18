@@ -1,8 +1,9 @@
 <template>
   <blockquote class="text-6xl font-bold text-[#5ad796] max-w-[1000px]">
-    &ldquo;{{ quote.q }}&rdquo;
+    &ldquo;{{ quote?.q || "Quotes loading..." }}&rdquo;
     <footer class="mt-8 text-5xl text-black font-normal">
-      <p>&mdash; {{ quote.a }}</p>
+      <p v-if="quote?.a">&mdash; {{ quote?.a }}</p>
+      <p v-else></p>
     </footer>
   </blockquote>
 </template>
