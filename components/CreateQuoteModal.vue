@@ -38,17 +38,19 @@
 
 <script setup>
 const { isModalVisible } = defineProps(["isModalVisible"]);
-const emit = defineEmits(["update:isModalVisible"]);
+const emit = defineEmits(["toggleCreateQuoteModal", "update:quotes"]);
 
 const newQuote = ref("");
 const newAuthor = ref("");
 const isSaveButtonActive = ref(false);
 
 const saveQuote = () => {
+  const newQuoteData = { q: newQuote.value, a: newAuthor.value };
   const savedQuotes = JSON.parse(localStorage.getItem("savedQuotes") || "[]");
-  savedQuotes.push({ q: newQuote.value, a: newAuthor.value });
+  savedQuotes.push(newQuoteData);
   localStorage.setItem("savedQuotes", JSON.stringify(savedQuotes));
   emit("toggleCreateQuoteModal");
+  emit("update:quotes", newQuoteData);
 };
 
 watch([newQuote, newAuthor], () => {

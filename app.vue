@@ -2,9 +2,10 @@
   <div class="flex flex-col items-center justify-center h-screen">
     <QuoteCard :quote="quotes[quoteNumber]" />
     <CreateQuoteModal
-      v-if="isModalVisible"
-      :isModalVisible.sync="isModalVisible"
+      v-if="isCreateQuoteVisible"
+      :isCreateQuoteVisible.sync="isCreateQuoteVisible"
       v-on:toggleCreateQuoteModal="toggleCreateQuoteModal"
+      v-on:update:quotes="addNewQuote"
     />
     <QuoteList
       v-if="isQuoteListVisible"
@@ -44,10 +45,21 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, watch } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
+
 const { data: quotes } = await useFetch("https://zenquotes.io/api/quotes/");
+
+onMounted(() => {
+  const storedValue = JSON.parse(
+    window.localStorage.getItem("savedQuotes") || "[]"
+  );
+  if (storedValue) {
+    quotes.value = [...quotes.value, ...storedValue];
+  }
+});
+
 const quoteNumber = ref(Math.floor(Math.random() * quotes.value.length));
-const isModalVisible = ref(false);
+const isCreateQuoteVisible = ref(false);
 const isQuoteListVisible = ref(false);
 
 let interval;
@@ -67,19 +79,23 @@ const resetTimer = () => {
 };
 
 onMounted(() => {
-  interval = setInterval(getNewQuote, 60000); // Initial interval setup
+  interval = setInterval(getNewQuote, 60000);
 });
 
 onUnmounted(() => {
-  clearInterval(interval); // Clear interval when component is unmounted
+  clearInterval(interval);
 });
 
 const toggleCreateQuoteModal = () => {
-  isModalVisible.value = !isModalVisible.value;
+  isCreateQuoteVisible.value = !isCreateQuoteVisible.value;
 };
 
 const toggleQuoteListModal = () => {
   isQuoteListVisible.value = !isQuoteListVisible.value;
+};
+
+const addNewQuote = (newQuote) => {
+  quotes.value.push(newQuote);
 };
 </script>
 
