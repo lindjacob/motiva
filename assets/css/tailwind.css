@@ -7,7 +7,4 @@ body {
 }
 
 @layer components {
-  .card {
-    @apply bg-white rounded-xl shadow-md;
-  }
 }
