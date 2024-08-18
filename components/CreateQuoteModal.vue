@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed inset-0 bg-white/90 flex justify-center items-center">
+  <div class="fixed inset-0 bg-white/90 flex justify-center items-center z-10">
     <div class="bg-white p-10 rounded-lg shadow-lg flex flex-col gap-4">
       <v-textarea
         v-model="newQuote"

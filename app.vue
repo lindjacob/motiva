@@ -6,7 +6,12 @@
       :isModalVisible.sync="isModalVisible"
       v-on:toggleCreateQuoteModal="toggleCreateQuoteModal"
     />
-    <div class="mt-15 flex justify-between gap-4">
+    <QuoteList
+      v-if="isQuoteListVisible"
+      :quotes="quotes"
+      v-on:toggleQuoteListModal="toggleQuoteListModal"
+    />
+    <div class="mt-15 flex justify-between gap-4 mb-4">
       <v-btn
         class="w-56"
         size="x-large"
@@ -26,6 +31,15 @@
         New Quote
       </v-btn>
     </div>
+    <v-btn
+      class="w-44"
+      size="large"
+      variant="outlined"
+      append-icon="mdi-eye"
+      @click="toggleQuoteListModal"
+    >
+      View Quotes
+    </v-btn>
   </div>
 </template>
 
@@ -34,6 +48,7 @@ import { ref, onMounted, onUnmounted, watch } from "vue";
 const { data: quotes } = await useFetch("https://zenquotes.io/api/quotes/");
 const quoteNumber = ref(Math.floor(Math.random() * quotes.value.length));
 const isModalVisible = ref(false);
+const isQuoteListVisible = ref(false);
 
 let interval;
 
@@ -61,6 +76,10 @@ onUnmounted(() => {
 
 const toggleCreateQuoteModal = () => {
   isModalVisible.value = !isModalVisible.value;
+};
+
+const toggleQuoteListModal = () => {
+  isQuoteListVisible.value = !isQuoteListVisible.value;
 };
 </script>
 
