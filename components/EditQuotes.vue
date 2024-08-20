@@ -3,12 +3,11 @@
     <template v-slot:activator="{ props: activatorProps }">
       <v-btn
         v-bind="activatorProps"
-        text="Edit Quotes"
-        variant="outlined"
-        prepend-icon="mdi-pencil"
-        rounded="xl"
+        density="comfortable"
+        icon="mdi-playlist-edit"
         size="x-large"
-        class="w-52"
+        variant="outlined"
+        class="!size-14"
       ></v-btn>
     </template>
 

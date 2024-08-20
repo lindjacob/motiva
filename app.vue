@@ -1,22 +1,37 @@
 <template>
-  <div class="flex flex-col items-center justify-center h-screen">
+  <div
+    class="flex flex-col items-center justify-center h-screen container mx-auto max-w-[1000px]"
+  >
     <QuoteCard :quote="currentQuote" />
-    <div class="flex justify-center items-center gap-6 mt-12">
-      <EditQuotes class="mt-40" :quotes="quotes">
-        <template v-slot:activator>
-          <CreateQuote v-on:update:quotes="addNewQuote" />
-        </template>
-      </EditQuotes>
-      <v-btn
-        class="w-52 !border-[#5ad796]"
-        size="x-large"
-        variant="outlined"
-        rounded="xl"
-        append-icon="mdi-fast-forward"
-        @click="setNewQuote"
-      >
-        New Quote
-      </v-btn>
+    <v-divider opacity="100" class="w-full mt-12" />
+    <div class="w-full flex mt-7 justify-between">
+      <div class="flex justify-end gap-4">
+        <EditQuotes :quotes="quotes">
+          <template v-slot:activator>
+            <CreateQuote v-on:update:quotes="addNewQuote" />
+          </template>
+        </EditQuotes>
+        <FavoriteQuote :currentQuote="currentQuote" />
+        <v-btn
+          icon="mdi-book-outline"
+          variant="outlined"
+          class="!size-14"
+          size="x-large"
+        ></v-btn>
+      </div>
+      <div class="flex justify-center items-center gap-6">
+        <v-btn
+          class="w-52 !border-[#5ad796]"
+          size="x-large"
+          variant="flat"
+          rounded="xl"
+          color="#5ad796"
+          append-icon="mdi-auto-fix"
+          @click="setNewQuote"
+        >
+          Inspire Me!
+        </v-btn>
+      </div>
     </div>
   </div>
 </template>
@@ -59,6 +74,15 @@ onUnmounted(() => {
 // Add new quote
 const addNewQuote = (newQuote) => {
   quotes.value.push(newQuote);
+};
+
+// Favorite quote
+const favoriteQuote = () => {
+  const favoriteQuotes = JSON.parse(
+    localStorage.getItem("favoriteQuotes") || "[]"
+  );
+  favoriteQuotes.push(currentQuote.value);
+  localStorage.setItem("favoriteQuotes", JSON.stringify(favoriteQuotes));
 };
 </script>
 

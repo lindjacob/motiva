@@ -1,11 +1,23 @@
 <template>
-  <blockquote class="text-6xl font-bold text-[#5ad796] max-w-[1000px]">
-    &ldquo;{{ quote?.q || "Quotes loading..." }}&rdquo;
-    <footer class="mt-5 text-5xl text-black font-normal">
+  <div class="w-full text-5xl font-bold text-[#5ad796] text-left">
+    <v-icon
+      color="#5ad796"
+      icon="mdi-format-quote-open"
+      size="small"
+      class="self-start -mt-8"
+    ></v-icon>
+    {{ quote?.q || "Quotes loading..." }}
+    <v-icon
+      color="#5ad796"
+      icon="mdi-format-quote-close"
+      size="small"
+      class="-mb-8"
+    ></v-icon>
+    <footer class="mt-8 text-4xl text-black font-normal text-right">
       <p v-if="quote?.a">&mdash; {{ quote?.a }}</p>
       <p v-else></p>
     </footer>
-  </blockquote>
+  </div>
 </template>
 
 <script setup>
