@@ -1,7 +1,7 @@
 <template>
   <v-btn
     aria-label="Favorite Quote"
-    :icon="isFavorite ? 'mdi-star' : 'mdi-heart-outline'"
+    :icon="isFavorite ? 'mdi-bookmark' : 'mdi-bookmark-outline'"
     variant="outlined"
     size="x-large"
     class="!size-14"
