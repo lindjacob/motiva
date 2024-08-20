@@ -3,10 +3,11 @@
     <template v-slot:activator="{ props: activatorProps }">
       <v-btn
         v-bind="activatorProps"
-        color="surface-variant"
+        color="#5ad796"
         text="Create Quote"
-        variant="outlined"
+        variant="flat"
         prepend-icon="mdi-plus-thick"
+        rounded="xl"
       ></v-btn>
     </template>
 

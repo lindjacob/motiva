@@ -1,46 +1,23 @@
 <template>
   <div class="flex flex-col items-center justify-center h-screen">
     <QuoteCard :quote="currentQuote" />
-    <CreateQuoteModal
-      v-if="isCreateQuoteVisible"
-      :isCreateQuoteVisible.sync="isCreateQuoteVisible"
-      v-on:toggleCreateQuoteModal="toggleCreateQuoteModal"
-      v-on:update:quotes="addNewQuote"
-    />
-    <QuoteList
-      v-if="isQuoteListVisible"
-      :quotes="quotes"
-      v-on:toggleQuoteListModal="toggleQuoteListModal"
-    />
-    <div class="mt-15 flex justify-between gap-4 mb-4">
+    <div class="flex justify-center items-center gap-6 mt-12">
+      <EditQuotes class="mt-40" :quotes="quotes">
+        <template v-slot:activator>
+          <CreateQuote v-on:update:quotes="addNewQuote" />
+        </template>
+      </EditQuotes>
       <v-btn
-        class="w-56"
+        class="w-52 !border-[#5ad796]"
         size="x-large"
         variant="outlined"
-        prepend-icon="mdi-plus-thick"
-        @click="toggleCreateQuoteModal"
-      >
-        Create quote
-      </v-btn>
-      <v-btn
-        class="w-56"
-        size="x-large"
-        variant="outlined"
+        rounded="xl"
         append-icon="mdi-fast-forward"
         @click="setNewQuote"
       >
         New Quote
       </v-btn>
     </div>
-    <v-btn
-      class="w-44"
-      size="large"
-      variant="outlined"
-      append-icon="mdi-eye"
-      @click="toggleQuoteListModal"
-    >
-      View Quotes
-    </v-btn>
   </div>
 </template>
 
@@ -78,16 +55,6 @@ onMounted(() => {
 onUnmounted(() => {
   clearInterval(interval);
 });
-
-// Toggle modals
-const isCreateQuoteVisible = ref(false);
-const isQuoteListVisible = ref(false);
-const toggleCreateQuoteModal = () => {
-  isCreateQuoteVisible.value = !isCreateQuoteVisible.value;
-};
-const toggleQuoteListModal = () => {
-  isQuoteListVisible.value = !isQuoteListVisible.value;
-};
 
 // Add new quote
 const addNewQuote = (newQuote) => {
