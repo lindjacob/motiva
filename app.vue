@@ -70,15 +70,6 @@ onUnmounted(() => {
 const addNewQuote = (newQuote) => {
   quotes.value.push(newQuote);
 };
-
-// Favorite quote
-const favoriteQuote = () => {
-  const favoriteQuotes = JSON.parse(
-    localStorage.getItem("favoriteQuotes") || "[]"
-  );
-  favoriteQuotes.push(currentQuote.value);
-  localStorage.setItem("favoriteQuotes", JSON.stringify(favoriteQuotes));
-};
 </script>
 
 <style scoped></style>
