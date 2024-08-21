@@ -12,12 +12,7 @@
           </template>
         </EditQuotes>
         <FavoriteQuote :currentQuote="currentQuote" />
-        <v-btn
-          icon="mdi-book-outline"
-          variant="outlined"
-          class="!size-14"
-          size="x-large"
-        ></v-btn>
+        <FavoriteQuotes />
       </div>
       <div class="flex justify-center items-center gap-6">
         <v-btn
