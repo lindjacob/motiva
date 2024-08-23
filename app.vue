@@ -1,11 +1,13 @@
 <template>
   <div
-    class="flex flex-col items-center justify-center h-screen container mx-auto max-w-[1000px]"
+    class="flex flex-col items-center justify-center h-screen container mx-auto max-w-[1000px] px-5 sm:px-20"
   >
     <QuoteCard :quote="currentQuote" />
     <v-divider opacity="100" class="w-full mt-12" />
-    <div class="w-full flex mt-7 justify-between">
-      <div class="flex justify-end gap-4">
+    <div
+      class="w-full mt-7 flex flex-col gap-5 items-center sm:flex-row sm:justify-between sm:gap-0"
+    >
+      <div class="flex justify-end gap-1 md:gap-4">
         <EditQuotes :quotes="quotes">
           <template v-slot:activator>
             <CreateQuote v-on:update:quotes="addNewQuote" />
@@ -14,19 +16,17 @@
         <FavoriteQuote :currentQuote="currentQuote" />
         <FavoriteQuotes />
       </div>
-      <div class="flex justify-center items-center gap-6">
-        <v-btn
-          class="w-52 !border-[#5ad796]"
-          size="x-large"
-          variant="flat"
-          rounded="xl"
-          color="#5ad796"
-          append-icon="mdi-auto-fix"
-          @click="setNewQuote"
-        >
-          Inspire Me!
-        </v-btn>
-      </div>
+      <v-btn
+        class="w-52 !border-[#5ad796]"
+        size="x-large"
+        variant="flat"
+        rounded="xl"
+        color="#5ad796"
+        append-icon="mdi-auto-fix"
+        @click="setNewQuote"
+      >
+        Inspire Me!
+      </v-btn>
     </div>
   </div>
 </template>
